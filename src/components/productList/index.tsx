@@ -9,6 +9,8 @@ import {
 import Item from "../Item";
 
 import { useStyles } from "./style";
+import { productsLoading } from "../../redux/selectors/products";
+import { CircularProgress } from "@mui/material";
 
 const ProductList: React.FC = () => {
   const classes = useStyles();
@@ -16,6 +18,7 @@ const ProductList: React.FC = () => {
   const { category } = useParams<RouteParams>();
 
   const items = useSelector((state: any) => state.products.data);
+  const loading = useSelector(productsLoading);
 
   useEffect(() => {
     if (!category || category === "all") {
@@ -24,6 +27,10 @@ const ProductList: React.FC = () => {
       dispatch(getProductsInCategory(category));
     }
   }, [dispatch, category]);
+
+  if (loading || !items) {
+    return <CircularProgress style={{ margin: "auto" }} />;
+  }
 
   return (
     <div className={classes.root}>

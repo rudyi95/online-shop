@@ -50,7 +50,7 @@ export const ProductsContextProvider: React.FC<any> = ({ children }) => {
   const [category, setCategory] = useState<string>("popular");
   const [term, setTerm] = useState<string>("");
   const [sortValue, setSortValue] = useState<string>("lh");
-  const [itemsPerPage, setItemsPerPage] = useState<number>(8);
+  const [itemsPerPage] = useState<number>(8);
   const [usePriceFilter, setUsePriceFilter] = useState<boolean>(false);
   const [showPopular, setShowPopular] = useState<boolean>(false);
   const [minPrice, setMinPrice] = useState<number>(0);

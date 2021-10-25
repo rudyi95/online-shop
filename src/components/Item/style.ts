@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
   root: {
     width: 265,
     height: 341,
-    margin: "auto",
+    margin: "10px auto 10px auto",
 
     "& .MuiCardMedia-root": {
       width: "100%",

@@ -3,6 +3,7 @@ import { PRODUCTS } from "../actions/types";
 const initialState = {
   data: [],
   item: null,
+  loading: false,
 };
 
 const getProductsHandler = (state, payload) => {
@@ -12,6 +13,11 @@ const getProductsHandler = (state, payload) => {
 
 const getProductById = (state, payload) => {
   state = { ...state, item: payload };
+  return state;
+};
+
+const loadingHandler = (state, payload) => {
+  state = { ...state, loading: payload };
   return state;
 };
 
@@ -25,6 +31,8 @@ const productsReducer = (state = initialState, action) => {
       return getProductById(state, payload);
     case PRODUCTS.GET_IN_CATEGORY:
       return getProductsHandler(state, payload);
+    case PRODUCTS.LOADING:
+      return loadingHandler(state, payload);
     default:
       return state;
   }

@@ -12,6 +12,7 @@ import { getProductById } from "../../redux/actions/products";
 import { ButtonIconType } from "../../types/enums";
 
 import "./Details.css";
+import { product, productsLoading } from "../../redux/selectors/products";
 
 const Details = () => {
   const dispatch = useDispatch();
@@ -19,8 +20,9 @@ const Details = () => {
   // const [relatedItems, setRelatedItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
-  const item = useSelector((state) => state.products.item);
+  const item = useSelector(product);
   // const items = useSelector((state) => state.items.items);
+  const loading = useSelector(productsLoading);
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -38,14 +40,17 @@ const Details = () => {
   //   }
   // }, [items, item]);
 
-  if (!item) {
-    return <CircularProgress className="circular" />;
+  // if (!item) {
+  //   return <CircularProgress className="circular" />;
+  // }
+  if (loading || !item) {
+    return <CircularProgress style={{ margin: "auto" }} />;
   }
 
   return (
     <div className="details-container">
       <div className="item-details">
-        <div className="details-title">{item.name}</div>
+        <div className="details-title">{item.title}</div>
         <div className="details-item-container">
           <img src={item.image} alt="" className="details-item-image" />
           <div className="details-item-content">
