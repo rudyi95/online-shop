@@ -1,0 +1,15 @@
+import _pick from "lodash/pick";
+// import queryString from "query-string";
+
+export const pickObjValuesByKeys = (originalObj = {}, keysArray = []) => {
+  return _pick(originalObj, keysArray);
+};
+
+export const isMenuItemActive = (item: any, location: any) => {
+  if (location.pathname === "/" && location.search) {
+    // let queryStringParsed = queryString.parse(location.search);
+
+    // return item.name === queryStringParsed.category;
+  }
+  return item.url === location.pathname;
+};
