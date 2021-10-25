@@ -10,9 +10,9 @@ import {
   TableHead,
   AppBar,
   Toolbar,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import { Phone as PhoneIcon } from "@material-ui/icons";
+import { Phone as PhoneIcon } from "@mui/icons-material";
 import ActionButton from "../common/buttons/ActionButton";
 
 import CartRow from "./CartRow";

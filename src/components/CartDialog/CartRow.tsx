@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { TableCell, TableRow, TextField } from "@material-ui/core";
+import { TableCell, TableRow, TextField } from "@mui/material";
 
 import ActionButton from "../common/buttons/ActionButton";
 
@@ -15,7 +15,7 @@ interface ICartRow {
   item: any;
 }
 
-const CartRow: FC<ICartRow> = ({ item }) => {
+const CartRow: React.FC<ICartRow> = ({ item }) => {
   const dispatch = useDispatch();
 
   return (

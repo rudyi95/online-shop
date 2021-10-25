@@ -9,8 +9,8 @@ import {
   AppBar,
   TextField,
   Avatar,
-} from "@material-ui/core";
-import { PersonOutline as Person } from "@material-ui/icons";
+} from "@mui/material";
+import { PersonOutline as Person } from "@mui/icons-material";
 
 import cartImage from "../../Images/logo2.png";
 

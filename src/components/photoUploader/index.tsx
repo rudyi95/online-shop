@@ -1,5 +1,5 @@
 import React, { useRef, BaseSyntheticEvent, useState, useEffect } from "react";
-import { Box, Avatar } from "@material-ui/core";
+import { Box, Avatar } from "@mui/material";
 
 // import { getBase64 } from '../../utils/helpers/photo'
 

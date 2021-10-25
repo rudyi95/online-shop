@@ -8,7 +8,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
-} from "@material-ui/core";
+} from "@mui/material";
 
 // import { getAllItems, deleteItemById } from "../../../redux/actions/items";
 

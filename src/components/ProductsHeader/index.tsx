@@ -7,7 +7,7 @@ import { /* useLocation, */ withRouter } from "react-router-dom";
 //   Select,
 //   FormControlLabel,
 //   Checkbox,
-// } from "@material-ui/core";
+// } from "@mui/material";
 // import queryString from "query-string";
 
 // import PriceDialog from "../PriceDialog";

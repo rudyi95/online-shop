@@ -2,8 +2,8 @@ import React, { /* useCallback, */ /* useContext */ } from "react";
 import { /* Redirect, */ useHistory/* , useLocation */ } from "react-router-dom";
 import { useFormik } from "formik";
 
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { TextField, Button, Avatar } from "@material-ui/core";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { TextField, Button, Avatar } from "@mui/material";
 
 import { useStyles } from "./style";
 

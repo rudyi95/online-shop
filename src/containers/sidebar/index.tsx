@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { has } from "lodash";
-import { Icon, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { Icon, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
 import { DATA_FOR_MENU } from "../../utils/services/constants";
 

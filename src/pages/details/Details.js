@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addItemInCart } from "../../redux/actions/index";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import { CircularProgress, TextField } from "@material-ui/core";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { CircularProgress, TextField } from "@mui/material";
 // import Item from "../../components/Item";
 
 import ActionButton from "../../components/common/buttons/ActionButton";

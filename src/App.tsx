@@ -3,20 +3,20 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { Collapse } from "@mui/material";
 
-import Routes from "./Routes";
-
 import store from "./redux/store";
 
 import "./App.css";
 
+const Layout = React.lazy(() => import("./containers/layout"));
+
 const App = () => (
-  <Provider store={store}>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
       <Suspense fallback={<Collapse />}>
-        <Routes />
+        <Layout />
       </Suspense>
-    </BrowserRouter>
-  </Provider>
+    </Provider>
+  </BrowserRouter>
 );
 
 export default App;

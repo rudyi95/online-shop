@@ -5,7 +5,7 @@ import {
   InputBaseProps,
   OutlinedInput,
   Typography
-} from '@material-ui/core'
+} from '@mui/material'
 
 import useStyles from './style'
 

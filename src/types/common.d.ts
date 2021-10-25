@@ -6,3 +6,10 @@ declare interface RouteParams {
   id?: string;
   category?: string;
 }
+
+declare interface RouteProps {
+  path: string
+  component: ExoticComponent
+  exact?: boolean
+  name?: string
+}

@@ -16,8 +16,8 @@ import {
   FirstPage,
   LastPage,
   LockOutlined,
-} from "@material-ui/icons";
-import { ButtonProps, IconProps } from "@material-ui/core";
+} from "@mui/icons-material";
+import { ButtonProps, IconProps } from "@mui/material";
 
 const buttonIcons = {
   [ButtonIconType.shoppingCartOutlined]: ShoppingCartOutlined,

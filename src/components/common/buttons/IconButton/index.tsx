@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
-import { Badge } from "@material-ui/core";
+import { Badge, Tooltip, TooltipProps } from "@mui/material";
 import classnames from "classnames";
 
 import { getButtonIcon } from "../../../../utils/services/common/iconButton";
@@ -16,8 +15,6 @@ const IconButton: FC<IconButtonProps & Omit<TooltipProps, "children">> = ({
   type,
   disabled,
   useDefaultStyles = true,
-  fontSize = "large",
-  color,
   buttonType,
   badgeContent,
   badgeColor,
@@ -30,14 +27,12 @@ const IconButton: FC<IconButtonProps & Omit<TooltipProps, "children">> = ({
     <a href={href} target="_blank" rel="noopener noreferrer">
       <ButtonIcon
         onClick={!disabled ? onClick : () => {}}
-        fontSize={fontSize}
         className={classnames(
           className,
           { [classes.root]: useDefaultStyles },
           { [classes.disabled]: disabled }
         )}
         disabled={disabled}
-        color={color}
         href={href}
       />
     </a>

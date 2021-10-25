@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
+import { Button, Dialog, DialogTitle, TextField } from "@mui/material";
 
 class PriceDialog extends Component {
   state = {
     lastOpenedStatus: false,
   };
-
 
   // Only when this dialog is opened, copy the prices to local state.
   static getDerivedStateFromProps(props, state) {
@@ -38,7 +34,7 @@ class PriceDialog extends Component {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <DialogTitle>Діапазон цін</DialogTitle>
@@ -50,17 +46,13 @@ class PriceDialog extends Component {
                 style={{ width: 70 }}
                 placeholder="Min"
                 label="Мінімум"
-                onChange={e => {
+                onChange={(e) => {
                   let val = parseInt(e.target.value, 10);
-                  if (
-                    Number.isNaN(val) ||
-                    val < 0 ||
-                    val > 100000
-                  ) {
+                  if (Number.isNaN(val) || val < 0 || val > 100000) {
                     return;
                   }
                   this.setState({
-                    min: val
+                    min: val,
                   });
                 }}
               />
@@ -70,18 +62,14 @@ class PriceDialog extends Component {
                 style={{ width: 70, marginLeft: 20 }}
                 placeholder="Max"
                 label="Максимум"
-                onChange={e => {
+                onChange={(e) => {
                   let val = parseInt(e.target.value, 10);
 
-                  if (
-                    Number.isNaN(val) ||
-                    val < 0 ||
-                    val > 100000
-                  ) {
+                  if (Number.isNaN(val) || val < 0 || val > 100000) {
                     return;
                   }
                   this.setState({
-                    max: val
+                    max: val,
                   });
                 }}
               />
