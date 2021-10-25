@@ -1,0 +1,31 @@
+{
+  "files": {
+    "static/js/0.307cfb65.chunk.js": "/online-shop/static/js/0.307cfb65.chunk.js",
+    "static/js/0.307cfb65.chunk.js.map": "/online-shop/static/js/0.307cfb65.chunk.js.map",
+    "main.css": "/online-shop/static/css/main.c624a172.chunk.css",
+    "main.js": "/online-shop/static/js/main.15e1875d.chunk.js",
+    "main.js.map": "/online-shop/static/js/main.15e1875d.chunk.js.map",
+    "runtime-main.js": "/online-shop/static/js/runtime-main.eddb2404.js",
+    "runtime-main.js.map": "/online-shop/static/js/runtime-main.eddb2404.js.map",
+    "static/js/3.957af63c.chunk.js": "/online-shop/static/js/3.957af63c.chunk.js",
+    "static/js/3.957af63c.chunk.js.map": "/online-shop/static/js/3.957af63c.chunk.js.map",
+    "static/css/4.11d4b7c3.chunk.css": "/online-shop/static/css/4.11d4b7c3.chunk.css",
+    "static/js/4.fe268590.chunk.js": "/online-shop/static/js/4.fe268590.chunk.js",
+    "static/js/4.fe268590.chunk.js.map": "/online-shop/static/js/4.fe268590.chunk.js.map",
+    "static/js/5.13b9261d.chunk.js": "/online-shop/static/js/5.13b9261d.chunk.js",
+    "static/js/5.13b9261d.chunk.js.map": "/online-shop/static/js/5.13b9261d.chunk.js.map",
+    "static/js/6.bb9ecb02.chunk.js": "/online-shop/static/js/6.bb9ecb02.chunk.js",
+    "static/js/6.bb9ecb02.chunk.js.map": "/online-shop/static/js/6.bb9ecb02.chunk.js.map",
+    "index.html": "/online-shop/index.html",
+    "static/css/4.11d4b7c3.chunk.css.map": "/online-shop/static/css/4.11d4b7c3.chunk.css.map",
+    "static/css/main.c624a172.chunk.css.map": "/online-shop/static/css/main.c624a172.chunk.css.map",
+    "static/js/3.957af63c.chunk.js.LICENSE.txt": "/online-shop/static/js/3.957af63c.chunk.js.LICENSE.txt",
+    "static/media/logo2.b4ffa6a8.png": "/online-shop/static/media/logo2.b4ffa6a8.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.eddb2404.js",
+    "static/js/3.957af63c.chunk.js",
+    "static/css/main.c624a172.chunk.css",
+    "static/js/main.15e1875d.chunk.js"
+  ]
+}
