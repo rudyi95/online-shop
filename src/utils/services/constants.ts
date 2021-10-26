@@ -2012,7 +2012,12 @@ export const SAMPLE_PRODUCTS = [
   },
 ];
 
-export const CATEGORIES = [
+export const MENU_DATA = [
+  {
+    name: "main",
+    title: "Головна",
+    icon: "home",
+  },
   {
     id: 1,
     name: "all",
@@ -2020,24 +2025,32 @@ export const CATEGORIES = [
     icon: "list",
   },
   {
+    id: 2,
     name: "electronics",
     title: "Електроніка",
     icon: "play_arrow",
+    url: "electronics",
   },
   {
+    id: 3,
     name: "jewelery",
     title: "Ювелірні вироби",
     icon: "play_arrow",
+    url: "jewelery",
   },
   {
+    id: 4,
     name: "men's clothing",
     title: "Чоловічий одяг",
     icon: "play_arrow",
+    url: "men's clothing",
   },
   {
+    id: 5,
     name: "women's clothing",
     title: "Жіночий одяг",
     icon: "play_arrow",
+    url: ""
   },
 ];
 
@@ -2046,20 +2059,3 @@ export const ROUTES = {
   productPage: "/details/",
   categoryPage: "/category/",
 };
-
-export const DATA_FOR_MENU = [
-  { name: "Головна", url: ROUTES.mainPage, icon: "home", id: 0 },
-  {
-    name: "Категорії",
-    id: 1,
-    children: CATEGORIES.map((x, i) => {
-      return {
-        name: x.name,
-        id: 2 + i,
-        url: ROUTES.categoryPage + x.name,
-        icon: x.icon,
-        title: x.title,
-      };
-    }),
-  },
-];

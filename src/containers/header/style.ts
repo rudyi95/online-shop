@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 export const useStyles = makeStyles({
   root: {
-    position: 'inherit',
+    position: "inherit",
     boxSizing: "border-box",
     backgroundColor: "#FAFAFB",
   },
@@ -33,24 +33,10 @@ export const useStyles = makeStyles({
     marginLeft: 20,
     cursor: "pointer",
   },
-  search: {
-    marginLeft: 40,
-    marginBottom: 15,
-  },
-  searchBtn: {
-    marginLeft: 20,
-  },
-  searchIcon: {
-    display: "flex",
-    color: "gray",
-
-    "& svg": {
-      fontSize: 23,
-    },
-  },
   categories: {
     maxWidth: 200,
     marginLeft: 20,
+    height: 39,
   },
   phoneIcon: {
     borderRadius: 50,

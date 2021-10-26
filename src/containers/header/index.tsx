@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Toolbar,
-  Menu,
-  MenuItem,
-  Select,
-  AppBar,
-  TextField,
-  Avatar,
-} from "@mui/material";
+import { Toolbar, Menu, MenuItem, Select, AppBar, Avatar } from "@mui/material";
 import { PersonOutline as Person } from "@mui/icons-material";
 
 import cartImage from "../../Images/logo2.png";
 
+import Search from "../../components/searchInput";
 import IconButton from "../../components/common/buttons/IconButton";
 import ActionButton from "../../components/common/buttons/ActionButton";
 import { ButtonIconType } from "../../types/enums";
@@ -21,12 +14,12 @@ import { ButtonIconType } from "../../types/enums";
 import { showCartDlg, toggleMenu } from "../../redux/actions/index";
 import { logOutHandler } from "../../redux/actions/auth";
 
-import { CATEGORIES, ROUTES } from "../../utils/services/constants";
+import { MENU_DATA, ROUTES } from "../../utils/services/constants";
 
 import { useStyles } from "./style";
 
 // Option items for product categories.
-const categoryOptions = CATEGORIES.map((x) => {
+const categoryOptions = MENU_DATA.map((x) => {
   return (
     <MenuItem key={x.title} value={x.title}>
       {x.name}
@@ -34,14 +27,14 @@ const categoryOptions = CATEGORIES.map((x) => {
   );
 });
 
-const Header = () => {
+const Header: React.FC = () => {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [categoryFilterValue, setCategoryFilterValue] = useState(
-    CATEGORIES[0].title
+    MENU_DATA[1].title
   );
   const [logged, setLogged] = useState(false);
   const data = localStorage.getItem("userData");
@@ -66,33 +59,23 @@ const Header = () => {
             type={ButtonIconType.menu}
             title="Menu"
           />
-
           <img
             className={classes.logo}
             src={cartImage}
             alt={"Logo"}
             onClick={() => history.push(ROUTES.mainPage)}
           />
-
-          <TextField
-            className={classes.search}
-            label="Пошук..."
+          <Search
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <IconButton
-            className={classes.searchBtn}
-            type={ButtonIconType.search}
-            disabled={!searchTerm}
-            onClick={() =>
+            disabledBtn={!searchTerm}
+            onClickBtn={() =>
               history.push(
                 "/?category=" + categoryFilterValue + "&term=" + searchTerm
               )
             }
-            title=""
-            fontSize={"large"}
+            placeholder="Пошук..."
           />
-
           <Select
             className={classes.categories}
             value={categoryFilterValue}

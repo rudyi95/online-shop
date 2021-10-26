@@ -1,96 +1,42 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { has } from "lodash";
 import { Icon, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import classNames from "classnames";
 
-import { DATA_FOR_MENU } from "../../utils/services/constants";
-
-import {isMenuItemActive} from '../../utils/services/sidebar/helpers';
+import { MENU_DATA, ROUTES } from "../../utils/services/constants";
 
 import { useStyles } from "./style";
 
-const Menu = () => {
+const Menu: React.FC = () => {
   const classes = useStyles();
   const showMenu = useSelector((state: any) => state.menu.showMenu);
 
-  if (showMenu) return null;
-
   return (
     <div
-      className={classes.root}
-      style={{
-        backgroundColor: "#FAFAFB",
-      }}
+      className={classNames(classes.root, { [classes.openMenu]: !showMenu })}
     >
-      {DATA_FOR_MENU.map((item) => {
-        return !has(item, "children") ? (
-          <NavLink
-            className="menu-list"
-            to={item.url || "/"}
-            exact
-            isActive={(param, location) => {
-              return isMenuItemActive(item, location);
-            }}
-            style={{
-              textDecoration: "none",
-              color: "rgb(32, 32, 34)",
-            }}
-            key={item.id}
-            activeStyle={{
-              color: "#4282ad",
-              fontWeight: "bold",
-            }}
-          >
-            <ListItem dense button>
-              <ListItemIcon className="list-item-icon">
-                <Icon>{item.icon}</Icon>
-              </ListItemIcon>
-              <ListItemText
-                disableTypography
-                primary={<div style={{ color: "inherit" }}>{item.name}</div>}
-              />
-            </ListItem>
-          </NavLink>
-        ) : (
-          <Fragment>
-            {item.children &&
-              item.children.map((item) => {
-                return (
-                  <NavLink
-                    className="menu-list"
-                    to={item.url}
-                    exact
-                    isActive={(param, location) => {
-                      return isMenuItemActive(item, location);
-                    }}
-                    style={{
-                      textDecoration: "none",
-                      color: "rgb(32, 32, 34)",
-                    }}
-                    key={item.id}
-                    activeStyle={{
-                      color: "#4282ad",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    <ListItem dense button>
-                      <ListItemIcon className="list-item-icon">
-                        <Icon>{item.icon}</Icon>
-                      </ListItemIcon>
-                      <ListItemText
-                        disableTypography
-                        primary={
-                          <div style={{ color: "inherit" }}>{item.title}</div>
-                        }
-                      />
-                    </ListItem>
-                  </NavLink>
-                );
-              })}
-          </Fragment>
-        );
-      })}
+      {MENU_DATA.map((item) => (
+        <NavLink
+          className={classes.menuItem}
+          to={item.url ? `${ROUTES.categoryPage}${item.url}` : ""}
+          key={item.id}
+        >
+          <ListItem dense button>
+            <ListItemIcon className="list-item-icon">
+              <Icon>{item.icon}</Icon>
+            </ListItemIcon>
+            <ListItemText
+              disableTypography
+              primary={
+                <div style={{ color: "inherit", whiteSpace: "nowrap" }}>
+                  {item.title}
+                </div>
+              }
+            />
+          </ListItem>
+        </NavLink>
+      ))}
     </div>
   );
 };

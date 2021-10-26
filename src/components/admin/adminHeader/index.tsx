@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { CATEGORIES } from "../../../utils/services/constants";
+import { MENU_DATA } from "../../../utils/services/constants";
 import { setCategoryFilter } from "../../../redux/actions/index";
 
 import ActionButton from "../../common/buttons/ActionButton";
@@ -9,7 +9,7 @@ import { useStyles } from "./style";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 
-const ProductsHeader = () => {
+const ProductsHeader: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -46,7 +46,7 @@ const ProductsHeader = () => {
               onBlur={formik.handleBlur}
               style={{ display: "block" }}
             >
-              {CATEGORIES.map((item: any) => {
+              {MENU_DATA.map((item: any) => {
                 return <option value={item.title} label={item.title} />;
               })}
             </select>
