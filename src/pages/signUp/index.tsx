@@ -1,38 +1,40 @@
-import React/* , { useCallback } */ from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { TextField, Button } from "@mui/material";
+import { withRouter } from "react-router";
+
+import { useAppDispatch } from "../../redux/hooks/redux";
+import { addUser } from "../../redux/services/userService";
 
 import { useStyles } from "./style";
-import { /* useHistory, */ withRouter } from "react-router";
 
 const Login = () => {
   const classes = useStyles();
-  // const history = useHistory();
-
-  // const handleSignUp = useCallback(
-  //   async (event) => {
-  //     const { email, password } = event;
-
-  //     try {
-  //       await app.auth().createUserWithEmailAndPassword(email, password);
-  //       history.push("/");
-  //     } catch (err) {
-  //       alert(err);
-  //     }
-  //     return false;
-  //   },
-  //   [history]
-  // );
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
       email: "",
+      username: "",
       password: "",
+      name: {
+        firstname: "",
+        lastname: "",
+      },
+      address: {
+        city: "",
+        street: "",
+        number: 0,
+        zipcode: "",
+        geolocation: {
+          lat: "",
+          long: "",
+        },
+      },
+      phone: "",
     },
-    onSubmit: (value) => {
-      console.log(value);
+    onSubmit: (value: User) => {
+      dispatch(addUser(value));
     },
   });
   return (
@@ -41,20 +43,28 @@ const Login = () => {
         <div className={classes.headText}>Реєстрація</div>
         <div className={classes.items}>
           <TextField
-            id="firstName"
-            name="firstName"
+            id="name.firstname"
+            name="name.firstname"
             type="text"
             placeholder="First Name"
             onChange={formik.handleChange}
-            value={formik.values.firstName}
+            value={formik.values.name.firstname}
           />
           <TextField
-            id="lastName"
-            name="lastName"
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Username"
+            onChange={formik.handleChange}
+            value={formik.values.username}
+          />
+          <TextField
+            id="name.lastname"
+            name="name.lastname"
             type="text"
             placeholder="Last Name"
             onChange={formik.handleChange}
-            value={formik.values.lastName}
+            value={formik.values.name.lastname}
           />
           <TextField
             id="email"

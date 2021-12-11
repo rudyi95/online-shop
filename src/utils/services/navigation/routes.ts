@@ -16,10 +16,12 @@ import React from "react";
 const Products = React.lazy(() => import("../../../pages/products"));
 const ProductPage = React.lazy(() => import("../../../pages/details/Details"));
 const LoginPage = React.lazy(() => import("../../../pages/signIn"));
+const RegisterPage = React.lazy(() => import("../../../pages/signUp"));
 
 export const routes = [
   { path: "/", exact: true, component: Products },
   { path: "/login", exact: true, component: LoginPage },
+  { path: "/register", exact: true, component: RegisterPage },
   { path: "/category/:category", component: Products },
   { path: "/details/:id", component: ProductPage },
 ];

@@ -4,12 +4,14 @@ import order from "./reducers/order";
 import login from "./reducers/auth";
 import products from "./reducers/products";
 import cart from "./reducers/cart";
+import user from "./reducers/user";
 
 const rootReducer = combineReducers({
   order,
   login,
   products,
   cart,
+  user,
 });
 
 export const setupStore = () => {
