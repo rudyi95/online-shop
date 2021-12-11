@@ -1,30 +1,26 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-} from "@mui/material";
+import { Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
 
 import ActionButton from "../common/buttons/ActionButton";
 
 import { ROUTES } from "../../utils/services/constants";
-import { addItemInCart } from "../../redux/actions/index";
-import { Item } from "../../types/products";
+import { Product } from "../../types/products";
+import { addToCart } from "../../redux/services/cartService";
 
 import { useStyles } from "./style";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
 
 interface ItemProps {
   className?: string;
-  item: Item;
+  item: Product;
 }
 
 const ItemCard: React.FC<ItemProps> = ({ item }) => {
   const classes = useStyles();
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { cartItems } = useAppSelector((state) => state.cart);
 
   return (
     <Card className={classes.root}>
@@ -52,7 +48,7 @@ const ItemCard: React.FC<ItemProps> = ({ item }) => {
               text={"У кошик"}
               onClick={(e: any) => {
                 e.stopPropagation();
-                dispatch(addItemInCart({ ...item, quantity: 1 }));
+                dispatch(addToCart({ ...item, quantity: 1 }, cartItems));
               }}
             />
           </div>

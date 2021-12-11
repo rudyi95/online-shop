@@ -1,28 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { TableCell, TableRow, TextField } from "@mui/material";
 
 import ActionButton from "../common/buttons/ActionButton";
 
 import {
-  showCartDlg,
-  deleteCartItem,
-  updateCartItemQnt,
-} from "../../redux/actions/index";
+  toggleCartDialog,
+  removeFromCart,
+  updateCart,
+} from "../../redux/services/cartService";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
 
-interface ICartRow {
-  item: any;
+interface IProps {
+  item: Cart;
 }
 
-const CartRow: React.FC<ICartRow> = ({ item }) => {
-  const dispatch = useDispatch();
+const CartRow: React.FC<IProps> = ({ item }) => {
+  const dispatch = useAppDispatch();
+  const { cartItems } = useAppSelector((state) => state.cart);
 
   return (
     <TableRow>
       <TableCell>
         <Link to={`/details/${item.id}`}>
-          <div onClick={() => dispatch(showCartDlg(false))}>{item.name}</div>
+          <div onClick={() => dispatch(toggleCartDialog(false))}>
+            {item.title}
+          </div>
         </Link>
       </TableCell>
       <TableCell>{item.price}</TableCell>
@@ -35,10 +38,13 @@ const CartRow: React.FC<ICartRow> = ({ item }) => {
             let quantity = parseInt(e.target.value, 10);
             if (quantity < 0) return;
             dispatch(
-              updateCartItemQnt({
-                id: item.id,
-                quantity,
-              })
+              updateCart(
+                {
+                  ...item,
+                  quantity,
+                },
+                cartItems
+              )
             );
           }}
         />
@@ -46,7 +52,7 @@ const CartRow: React.FC<ICartRow> = ({ item }) => {
       <TableCell>
         <ActionButton
           color="secondary"
-          onClick={() => dispatch(deleteCartItem(item.id))}
+          onClick={() => dispatch(removeFromCart(cartItems, item.id))}
           text={"Видалити"}
         />
       </TableCell>

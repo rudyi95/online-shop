@@ -1,6 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setCheckedOutItems } from "../../redux/actions/index";
 import {
   Button,
   Table,
@@ -10,13 +8,16 @@ import {
   TableRow,
 } from "@mui/material";
 
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
+import { setOrderItems } from '../../redux/services/orderService'
+
 import { useStyles } from "./style";
 
 // This component shows the items user checked out from the cart.
 const Order = () => {
-  const checkedOutItems = useSelector((state: any) => state.order.checkedOutItems);
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const dispatch = useAppDispatch();
+  const { checkedOutItems } = useAppSelector((state) => state.order);
 
   let totalPrice = checkedOutItems.reduce((accumulator: number, item: any) => {
     return accumulator + item.price * item.quantity;
@@ -59,7 +60,7 @@ const Order = () => {
         color="secondary"
         variant="outlined"
         disabled={totalPrice === 0}
-        onClick={() => dispatch(setCheckedOutItems([]))}
+        onClick={() => dispatch(setOrderItems([]))}
       >
         Скасувати
       </Button>

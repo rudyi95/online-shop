@@ -1,20 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Icon, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import classNames from "classnames";
 
 import { MENU_DATA, ROUTES } from "../../utils/services/constants";
+import storageService from "../../redux/services/storageService";
 
 import { useStyles } from "./style";
 
 const Menu: React.FC = () => {
   const classes = useStyles();
-  const showMenu = useSelector((state: any) => state.menu.showMenu);
+  const isOpenMenu = storageService.get('menu')
 
   return (
     <div
-      className={classNames(classes.root, { [classes.openMenu]: !showMenu })}
+      className={classNames(classes.root, { [classes.openMenu]: !isOpenMenu })}
     >
       {MENU_DATA.map((item) => (
         <NavLink

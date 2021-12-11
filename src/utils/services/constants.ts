@@ -2023,6 +2023,7 @@ export const MENU_DATA = [
     name: "all",
     title: "Усі категорії",
     icon: "list",
+    url: 'all'
   },
   {
     id: 2,
@@ -2050,7 +2051,7 @@ export const MENU_DATA = [
     name: "women's clothing",
     title: "Жіночий одяг",
     icon: "play_arrow",
-    url: ""
+    url: "women's clothing"
   },
 ];
 

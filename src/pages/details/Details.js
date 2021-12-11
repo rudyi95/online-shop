@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { addItemInCart } from "../../redux/actions/index";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { CircularProgress, TextField } from "@mui/material";
 // import Item from "../../components/Item";
 
 import ActionButton from "../../components/common/buttons/ActionButton";
-import { getProductById } from "../../redux/actions/products";
 
+import { getProductById } from "../../redux/services/productsService";
+import { addToCart } from "../../redux/services/cartService";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
 import { ButtonIconType } from "../../types/enums";
 
 import "./Details.css";
-import { product, productsLoading } from "../../redux/selectors/products";
 
 const Details = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
   // const [relatedItems, setRelatedItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const { product: item, loading } = useAppSelector((state) => state.products);
+  const { cartItems } = useAppSelector((state) => state.cart);
 
-  const item = useSelector(product);
   // const items = useSelector((state) => state.items.items);
-  const loading = useSelector(productsLoading);
+  // const loading = useSelector(productsLoading);
 
   useEffect(() => {
     dispatch(getProductById(id));
@@ -72,12 +72,7 @@ const Details = () => {
                 color="primary"
                 variant="outlined"
                 onClick={() => {
-                  dispatch(
-                    addItemInCart({
-                      ...item,
-                      quantity,
-                    })
-                  );
+                  dispatch(addToCart({ ...item, quantity }, cartItems));
                 }}
                 type={ButtonIconType.addShoppingCart}
                 text={"У кошик"}

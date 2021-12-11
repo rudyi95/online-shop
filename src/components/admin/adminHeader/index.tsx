@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { MENU_DATA } from "../../../utils/services/constants";
-import { setCategoryFilter } from "../../../redux/actions/index";
+// import { setCategoryFilter } from "../../../redux/actions/index";
 
 import ActionButton from "../../common/buttons/ActionButton";
 
@@ -24,7 +24,7 @@ const ProductsHeader: React.FC = () => {
   });
 
   useEffect(() => {
-    dispatch(setCategoryFilter(formik.values.category));
+    // dispatch(setCategoryFilter(formik.values.category));
   }, [formik.values.category, dispatch]);
 
   return (

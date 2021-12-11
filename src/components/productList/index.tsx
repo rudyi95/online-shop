@@ -1,40 +1,42 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProducts,
-  getProductsInCategory,
-} from "../../redux/actions/products";
+  getAllProductsInCategory,
+} from "../../redux/services/productsService";
 
 import Item from "../Item";
 
 import { useStyles } from "./style";
-import { productsLoading } from "../../redux/selectors/products";
 import { CircularProgress } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
 
 const ProductList: React.FC = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { category } = useParams<RouteParams>();
-
-  const items = useSelector((state: any) => state.products.data);
-  const loading = useSelector(productsLoading);
+  const { products, loading } = useAppSelector((state) => state.products);
 
   useEffect(() => {
-    if (!category || category === "all") {
-      dispatch(getAllProducts());
-    } else {
-      dispatch(getProductsInCategory(category));
+    if (category) {
+      switch (category) {
+        case "all":
+          dispatch(getAllProducts());
+          break;
+        default:
+          dispatch(getAllProductsInCategory(category));
+          break;
+      }
     }
   }, [dispatch, category]);
 
-  if (loading || !items) {
+  if (loading || !products) {
     return <CircularProgress style={{ margin: "auto" }} />;
   }
 
   return (
     <div className={classes.root}>
-      {items.map((item: any) => {
+      {products.map((item: any) => {
         return <Item key={item.id} item={item} />;
       })}
     </div>

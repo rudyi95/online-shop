@@ -1,24 +1,14 @@
 import { ButtonIconType } from "./enums";
 
-declare interface Item {
+declare interface Product {
   id: number;
   title: string;
   category: string;
   price: number;
   description: string;
-  rating: ItemRating;
   image: string;
 }
-// declare interface Item {
-//   _id: string;
-//   name: string;
-//   category: string;
-//   price: number;
-//   volume: number;
-//   description: string;
-//   popular: boolean;
-//   image?: string;
-// }
+
 declare interface ItemRating {
   rate: number;
   count: number;

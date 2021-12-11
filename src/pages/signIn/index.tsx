@@ -1,16 +1,20 @@
-import React, { /* useCallback, */ /* useContext */ } from "react";
-import { /* Redirect, */ useHistory/* , useLocation */ } from "react-router-dom";
+import React /* useCallback, */ /* useContext */ from "react";
+import { Redirect, useHistory, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { TextField, Button, Avatar } from "@mui/material";
 
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
 import { useStyles } from "./style";
+import { postLogin } from "../../redux/services/loginService";
 
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  // const location = useLocation();
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const { success } = useAppSelector((state) => state.login);
 
   // const handleSignIn = useCallback(
   //   async (event) => {
@@ -30,20 +34,20 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
-    onSubmit: (value) => {
-      console.log(value)
+    onSubmit: (value: loginData) => {
+      dispatch(postLogin(value));
     },
   });
 
-  // const { from }: any = location.state || { from: { pathname: "/" } };
+  const { from }: any = location.state || { from: { pathname: "/" } };
 
   // If user was authenticated, redirect her to where she came from.
-  // if (currentUser) {
-  //   return <Redirect to={from} />;
-  // }
+  if (success) {
+    return <Redirect to={from} />;
+  }
 
   return (
     <div className={classes.root}>
@@ -54,12 +58,12 @@ const Login = () => {
         <div className={classes.headText}>Увійти</div>
         <div className={classes.items}>
           <TextField
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Email"
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Username"
             onChange={formik.handleChange}
-            value={formik.values.email}
+            value={formik.values.username}
           />
           <TextField
             id="password"

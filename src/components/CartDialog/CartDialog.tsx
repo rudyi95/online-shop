@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
   TableCell,
@@ -18,28 +17,29 @@ import ActionButton from "../common/buttons/ActionButton";
 import CartRow from "./CartRow";
 import IconButton from "../common/buttons/IconButton";
 
-import { showCartDlg, setCheckedOutItems } from "../../redux/actions/index";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
+import { toggleCartDialog } from '../../redux/services/cartService'
+import { setOrderItems } from '../../redux/services/orderService'
 import { ButtonIconType } from "../../types/enums";
 
 import { useStyles } from "./style";
 
 const CartDialog = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
   const classes = useStyles();
 
-  const open = useSelector((state: any) => state.cart.showCartDialog);
-  const items = useSelector((state: any) => state.cart.cartItems);
+  const { showCartDialog, cartItems } = useAppSelector(state => state.cart)
 
-  let totalPrice = items.reduce((accumulator: number, item: any) => {
+  let totalPrice = cartItems.reduce((accumulator: number, item: Cart) => {
     return accumulator + item.price * item.quantity;
   }, 0);
 
   return (
     <div>
       <Dialog
-        open={open}
-        onClose={() => dispatch(showCartDlg(false))}
+        open={showCartDialog}
+        onClose={() => dispatch(toggleCartDialog(false))}
         maxWidth="md"
       >
         <AppBar position="static" style={{ backgroundColor: "#3863aa" }}>
@@ -70,7 +70,7 @@ const CartDialog = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((item: any, index: number) => (
+              {cartItems.map((item: Cart, index: number) => (
                 <CartRow item={item} key={item.id} />
               ))}
             </TableBody>
@@ -99,8 +99,8 @@ const CartDialog = () => {
             />
             <ActionButton
               onClick={() => {
-                dispatch(showCartDlg(false));
-                dispatch(setCheckedOutItems(items));
+                dispatch(toggleCartDialog(false));
+                dispatch(setOrderItems(cartItems));
                 history.push("/order");
               }}
               text={"Підтвердити"}

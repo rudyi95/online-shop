@@ -9,17 +9,20 @@ const BASE_CONNECTION = axios.create({
   baseURL: "https://fakestoreapi.com",
 });
 
-export const apiWrapper = ({ method, url, data }: IProps) => {
+export const apiWrapper = async <T>({ method, url, data }: IProps) => {
+  let res;
   switch (method) {
     case "get":
-      return BASE_CONNECTION.get(url);
+      res = await BASE_CONNECTION.get<T>(url);
+      return res.data;
     case "post":
-      return BASE_CONNECTION.post(url, data);
+      res = await BASE_CONNECTION.post<T>(url, data);
+      return res.data;
     case "put":
-      return BASE_CONNECTION.put(url, data);
+      res = await BASE_CONNECTION.put<T>(url, data);
+      return res.data;
     case "delete":
-      return BASE_CONNECTION.delete(url);
-    default:
-      return null;
+      res = await BASE_CONNECTION.delete<T>(url);
+      return res.data;
   }
 };

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { Toolbar, Menu, MenuItem, Select, AppBar, Avatar } from "@mui/material";
 import { PersonOutline as Person } from "@mui/icons-material";
 
@@ -11,10 +10,11 @@ import IconButton from "../../components/common/buttons/IconButton";
 import ActionButton from "../../components/common/buttons/ActionButton";
 import { ButtonIconType } from "../../types/enums";
 
-import { showCartDlg, toggleMenu } from "../../redux/actions/index";
-import { logOutHandler } from "../../redux/actions/auth";
-
 import { MENU_DATA, ROUTES } from "../../utils/services/constants";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
+import storageService from "../../redux/services/storageService";
+import { logout } from "../../redux/services/loginService";
+import { toggleCartDialog } from "../../redux/services/cartService";
 
 import { useStyles } from "./style";
 
@@ -30,32 +30,27 @@ const categoryOptions = MENU_DATA.map((x) => {
 const Header: React.FC = () => {
   const history = useHistory();
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const [categoryFilterValue, setCategoryFilterValue] = useState(
     MENU_DATA[1].title
   );
-  const [logged, setLogged] = useState(false);
-  const data = localStorage.getItem("userData");
 
-  const isAuth = useSelector((state: any) => state.auth.isAuth);
-  const nrOfItemsInCard = useSelector(
-    (state: any) => state.cart.cartItems.length
-  );
+  const isAuth = storageService.get("token");
+  const { cartItems } = useAppSelector((state) => state.cart);
 
-  useEffect(() => {
-    if (!!data || isAuth) {
-      setLogged(true);
-    } else setLogged(false);
-  }, [data, isAuth]);
+  const toggleMenu = () => {
+    const isOpen = storageService.get("menu");
+    storageService.set("menu", !isOpen);
+  };
 
   return (
     <AppBar className={classes.root} position="static">
       <Toolbar className={classes.headerToolbar}>
         <div className={classes.leftToolbar}>
           <IconButton
-            onClick={() => dispatch(toggleMenu())}
+            onClick={toggleMenu}
             type={ButtonIconType.menu}
             title="Menu"
           />
@@ -111,14 +106,17 @@ const Header: React.FC = () => {
           />
 
           <IconButton
-            onClick={() => dispatch(showCartDlg(true))}
-            badgeContent={nrOfItemsInCard}
+            onClick={() => {
+              dispatch(toggleCartDialog(true));
+              history.push("/order");
+            }}
+            badgeContent={cartItems.length}
             badgeColor="primary"
             type={ButtonIconType.shoppingCart}
             buttonType="withBadge"
             title=""
           />
-          {!logged ? ( // editThen
+          {!isAuth ? ( // editThen
             <ActionButton
               variant="outlined"
               color="primary"
@@ -159,7 +157,7 @@ const Header: React.FC = () => {
               onClick={(e) => {
                 setAnchorEl(null);
                 e.preventDefault();
-                dispatch(logOutHandler());
+                dispatch(logout());
                 history.push(ROUTES.mainPage);
               }}
             >
