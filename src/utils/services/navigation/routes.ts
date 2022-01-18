@@ -19,9 +19,9 @@ const LoginPage = React.lazy(() => import("../../../pages/signIn"));
 const RegisterPage = React.lazy(() => import("../../../pages/signUp"));
 
 export const routes = [
-  { path: "/", exact: true, component: Products },
-  { path: "/login", exact: true, component: LoginPage },
-  { path: "/register", exact: true, component: RegisterPage },
+  { path: "/", component: Products },
+  { path: "/login", component: LoginPage },
+  { path: "/register", component: RegisterPage },
   { path: "/category/:category", component: Products },
   { path: "/details/:id", component: ProductPage },
 ];

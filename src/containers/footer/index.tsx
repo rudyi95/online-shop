@@ -11,14 +11,12 @@ const Footer: React.FC = () => {
         <NavLink
           className={classes.link}
           to={"/"} // "/payment"
-          exact
         >
           Умови оплати
         </NavLink>
         <NavLink
           className={classes.link}
           to={"/"} // "/delivery"
-          exact
         >
           Доставка
         </NavLink>
@@ -28,18 +26,13 @@ const Footer: React.FC = () => {
         <NavLink
           className={classes.link}
           to={"/"} // "/info"
-          exact
         >
           Інформація про магазин
         </NavLink>
       </div>
       <div>
         <div className={classes.blockTitle}>Соціальні мережі</div>
-        <a
-          className={classes.link}
-          href="https://www.instagram.com/13_bootlegger/"
-          target="blank"
-        >
+        <a className={classes.link} href="https://www.instagram.com/13_bootlegger/" target="blank">
           <div className={classes.socialItem}>Instagram</div>
         </a>
       </div>

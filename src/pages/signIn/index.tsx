@@ -1,5 +1,5 @@
 import React /* useCallback, */ /* useContext */ from "react";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -11,7 +11,7 @@ import { postLogin } from "../../redux/services/loginService";
 
 const Login = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { success } = useAppSelector((state) => state.login);
@@ -23,7 +23,7 @@ const Login = () => {
 
   //     try {
   //       await app.auth().signInWithEmailAndPassword(email, password);
-  //       history.push("/");
+  //       navigate("/");
   //     } catch (err) {
   //       alert(err);
   //     }
@@ -46,7 +46,7 @@ const Login = () => {
 
   // If user was authenticated, redirect her to where she came from.
   if (success) {
-    return <Redirect to={from} />;
+    return <Link to={from} />;
   }
 
   return (
@@ -76,11 +76,7 @@ const Login = () => {
           <Button variant="outlined" color="primary" type="submit">
             Увійти
           </Button>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => history.push("/register")}
-          >
+          <Button variant="outlined" color="primary" onClick={() => navigate("/register")}>
             Зареєструватися
           </Button>
         </div>

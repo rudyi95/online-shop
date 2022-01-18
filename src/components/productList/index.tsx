@@ -14,7 +14,9 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
 const ProductList: React.FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
-  const { category } = useParams<RouteParams>();
+  const { category } = useParams();
+  const test = useParams()
+  console.log(test)
   const { products, loading } = useAppSelector((state) => state.products);
 
   useEffect(() => {

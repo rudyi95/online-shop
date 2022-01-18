@@ -10,15 +10,15 @@ import { useStyles } from "./style";
 
 const Menu: React.FC = () => {
   const classes = useStyles();
-  const isOpenMenu = storageService.get('menu')
+  const isOpenMenu = storageService.get("menu");
 
   return (
-    <div
-      className={classNames(classes.root, { [classes.openMenu]: !isOpenMenu })}
-    >
+    <div className={classNames(classes.root, { [classes.openMenu]: !isOpenMenu })}>
       {MENU_DATA.map((item) => (
         <NavLink
-          className={classes.menuItem}
+          className={({ isActive }) =>
+            classNames(classes.menuItem, { [classes.activeItem]: isActive })
+          }
           to={item.url ? `${ROUTES.categoryPage}${item.url}` : ""}
           key={item.id}
         >
@@ -28,11 +28,7 @@ const Menu: React.FC = () => {
             </ListItemIcon>
             <ListItemText
               disableTypography
-              primary={
-                <div style={{ color: "inherit", whiteSpace: "nowrap" }}>
-                  {item.title}
-                </div>
-              }
+              primary={<div style={{ color: "inherit", whiteSpace: "nowrap" }}>{item.title}</div>}
             />
           </ListItem>
         </NavLink>

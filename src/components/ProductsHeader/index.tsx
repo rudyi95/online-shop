@@ -1,5 +1,5 @@
 import React/* , { useContext, useState } */ from "react";
-import { /* useLocation, */ withRouter } from "react-router-dom";
+import { /* useLocation, */ } from "react-router-dom";
 // import {
 //   Button,
 //   Tooltip,
@@ -118,4 +118,4 @@ const ProductsHeader = (props: any) => {
   );
 };
 
-export default withRouter(ProductsHeader);
+export default ProductsHeader;

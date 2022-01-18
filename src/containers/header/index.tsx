@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Toolbar, Menu, MenuItem, Select, AppBar, Avatar } from "@mui/material";
 import { PersonOutline as Person } from "@mui/icons-material";
 
@@ -28,14 +28,12 @@ const categoryOptions = MENU_DATA.map((x) => {
 });
 
 const Header: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
-  const [categoryFilterValue, setCategoryFilterValue] = useState(
-    MENU_DATA[1].title
-  );
+  const [categoryFilterValue, setCategoryFilterValue] = useState(MENU_DATA[1].title);
 
   const isAuth = storageService.get("token");
   const { cartItems } = useAppSelector((state) => state.cart);
@@ -49,26 +47,18 @@ const Header: React.FC = () => {
     <AppBar className={classes.root} position="static">
       <Toolbar className={classes.headerToolbar}>
         <div className={classes.leftToolbar}>
-          <IconButton
-            onClick={toggleMenu}
-            type={ButtonIconType.menu}
-            title="Menu"
-          />
+          <IconButton onClick={toggleMenu} type={ButtonIconType.menu} title="Menu" />
           <img
             className={classes.logo}
             src={cartImage}
             alt={"Logo"}
-            onClick={() => history.push(ROUTES.mainPage)}
+            onClick={() => navigate(ROUTES.mainPage)}
           />
           <Search
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             disabledBtn={!searchTerm}
-            onClickBtn={() =>
-              history.push(
-                "/?category=" + categoryFilterValue + "&term=" + searchTerm
-              )
-            }
+            onClickBtn={() => navigate("/?category=" + categoryFilterValue + "&term=" + searchTerm)}
             placeholder="Пошук..."
           />
           <Select
@@ -90,11 +80,7 @@ const Header: React.FC = () => {
         </div>
         <div className={classes.rightToolbar}>
           <a className={classes.iconButton} href={"tel:+380936389876"}>
-            <IconButton
-              className={classes.phoneIcon}
-              type={ButtonIconType.phone}
-              title=""
-            />
+            <IconButton className={classes.phoneIcon} type={ButtonIconType.phone} title="" />
             <span> +380632112003 </span>
           </a>
 
@@ -108,7 +94,7 @@ const Header: React.FC = () => {
           <IconButton
             onClick={() => {
               dispatch(toggleCartDialog(true));
-              history.push("/order");
+              navigate("/order");
             }}
             badgeContent={cartItems.length}
             badgeColor="primary"
@@ -120,7 +106,7 @@ const Header: React.FC = () => {
             <ActionButton
               variant="outlined"
               color="primary"
-              onClick={() => history.push("/login")}
+              onClick={() => navigate("/login")}
               text={"Увійти"}
             />
           ) : (
@@ -132,15 +118,11 @@ const Header: React.FC = () => {
             </Avatar>
           )}
 
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={() => setAnchorEl(null)}
-          >
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
             <MenuItem
               onClick={() => {
                 setAnchorEl(null);
-                history.push("/admin");
+                navigate("/admin");
               }}
             >
               Сторінка адміна
@@ -148,7 +130,7 @@ const Header: React.FC = () => {
             <MenuItem
               onClick={() => {
                 setAnchorEl(null);
-                history.push("/order");
+                navigate("/order");
               }}
             >
               Оформити замовлення
@@ -158,7 +140,7 @@ const Header: React.FC = () => {
                 setAnchorEl(null);
                 e.preventDefault();
                 dispatch(logout());
-                history.push(ROUTES.mainPage);
+                navigate(ROUTES.mainPage);
               }}
             >
               Вийти

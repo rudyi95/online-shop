@@ -1,7 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import { TextField, Button } from "@mui/material";
-import { withRouter } from "react-router";
 
 import { useAppDispatch } from "../../redux/hooks/redux";
 import { addUser } from "../../redux/services/userService";
@@ -91,4 +90,4 @@ const Login = () => {
   );
 };
 
-export default withRouter(Login);
+export default Login;

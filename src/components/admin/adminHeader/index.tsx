@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MENU_DATA } from "../../../utils/services/constants";
 // import { setCategoryFilter } from "../../../redux/actions/index";
 
@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 
 const ProductsHeader: React.FC = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -31,10 +31,7 @@ const ProductsHeader: React.FC = () => {
     <div className={classes.root}>
       <div className={classes.header}>
         <div className={classes.actions}>
-          <ActionButton
-            onClick={() => history.push("./items/add")}
-            text={"Додати товар:"}
-          />
+          <ActionButton onClick={() => navigate("./items/add")} text={"Додати товар:"} />
           <form>
             <label htmlFor="email" style={{ display: "block" }}>
               Категорія:

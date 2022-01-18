@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card, CardActionArea, CardContent, CardMedia } from "@mui/material";
 
 import ActionButton from "../common/buttons/ActionButton";
@@ -18,7 +18,7 @@ interface ItemProps {
 
 const ItemCard: React.FC<ItemProps> = ({ item }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { cartItems } = useAppSelector((state) => state.cart);
 
@@ -26,7 +26,7 @@ const ItemCard: React.FC<ItemProps> = ({ item }) => {
     <Card className={classes.root}>
       <CardActionArea
         className={classes.actionArea}
-        onClick={() => history.push(ROUTES.productPage + item.id)}
+        onClick={() => navigate(ROUTES.productPage + item.id)}
       >
         <CardContent className={classes.content}>
           <CardMedia className={classes.itemImg} image={item.image} />

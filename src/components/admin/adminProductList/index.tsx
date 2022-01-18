@@ -1,4 +1,4 @@
-import React/* , { useEffect } */ from "react";
+import React /* , { useEffect } */ from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   TableContainer,
@@ -22,9 +22,7 @@ const Upload: React.FC = () => {
   const filter = useSelector((state: any) => state.admin.categoryToFilter);
 
   let filteredList = items.filter((item: any) =>
-    !filter || filter === "Усі категорії"
-      ? item.category
-      : item.category === filter
+    !filter || filter === "Усі категорії" ? item.category : item.category === filter
   );
 
   const deleteHandler = (_id: string) => {
@@ -59,7 +57,7 @@ const Upload: React.FC = () => {
                   return (
                     <TableRow
                       key={row.id}
-                      // onClick={() => history.push("/details/" + row.id)}
+                      // onClick={() => navigate("/details/" + row.id)}
                     >
                       <TableCell component="th" scope="row">
                         {row.id}
@@ -67,15 +65,11 @@ const Upload: React.FC = () => {
                       <TableCell align="right">{row.name}</TableCell>
                       <TableCell align="right">{row.category}</TableCell>
                       <TableCell align="right">{row.volume}</TableCell>
-                      <TableCell align="right">
-                        {row.popular ? "Акція" : ""}
-                      </TableCell>
+                      <TableCell align="right">{row.popular ? "Акція" : ""}</TableCell>
                       {/* <TableCell align="right">{row.description}</TableCell> */}
                       {/* <TableCell align="right">{row.imageUrls}</TableCell> */}
                       <TableCell align="right">{row.price}</TableCell>
-                      <button onClick={() => deleteHandler(row._id)}>
-                        Delete
-                      </button>
+                      <button onClick={() => deleteHandler(row._id)}>Delete</button>
                     </TableRow>
                   );
                 })}

@@ -17,4 +17,8 @@ export const useStyles = makeStyles({
     textDecoration: "none",
     color: "rgb(32, 32, 34)",
   },
+  activeItem: {
+    background: 'grey',
+    opacity: 0.5
+  }
 });

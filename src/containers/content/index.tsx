@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Collapse } from "@mui/material";
-import { Redirect, Route, Switch } from "react-router";
+import { Route, Routes } from "react-router";
 
 import Menu from "../sidebar";
 import CartDialog from "../../components/CartDialog/CartDialog";
@@ -11,23 +11,19 @@ import useStyles from "./style";
 
 const Content: React.FC = () => {
   const classes = useStyles();
+  const Products = React.lazy(() => import("../../pages/products"));
 
   return (
     <main className={classes.root}>
       <Menu />
       <Suspense fallback={<Collapse />}>
         <CartDialog />
-        <Switch>
+        <Routes>
           {routes.map((route: RouteProps, index: number) => (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              render={() => <route.component />}
-            />
+            <Route key={index} path={route.path} element={<route.component />} />
           ))}
-          <Redirect to="/" />
-        </Switch>
+          <Route element={<Products />} />
+        </Routes>
       </Suspense>
     </main>
   );

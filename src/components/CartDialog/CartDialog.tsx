@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   TableCell,
   TableRow,
@@ -18,18 +18,18 @@ import CartRow from "./CartRow";
 import IconButton from "../common/buttons/IconButton";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/redux";
-import { toggleCartDialog } from '../../redux/services/cartService'
-import { setOrderItems } from '../../redux/services/orderService'
+import { toggleCartDialog } from "../../redux/services/cartService";
+import { setOrderItems } from "../../redux/services/orderService";
 import { ButtonIconType } from "../../types/enums";
 
 import { useStyles } from "./style";
 
 const CartDialog = () => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
 
-  const { showCartDialog, cartItems } = useAppSelector(state => state.cart)
+  const { showCartDialog, cartItems } = useAppSelector((state) => state.cart);
 
   let totalPrice = cartItems.reduce((accumulator: number, item: Cart) => {
     return accumulator + item.price * item.quantity;
@@ -37,11 +37,7 @@ const CartDialog = () => {
 
   return (
     <div>
-      <Dialog
-        open={showCartDialog}
-        onClose={() => dispatch(toggleCartDialog(false))}
-        maxWidth="md"
-      >
+      <Dialog open={showCartDialog} onClose={() => dispatch(toggleCartDialog(false))} maxWidth="md">
         <AppBar position="static" style={{ backgroundColor: "#3863aa" }}>
           <Toolbar>
             <IconButton
@@ -101,7 +97,7 @@ const CartDialog = () => {
               onClick={() => {
                 dispatch(toggleCartDialog(false));
                 dispatch(setOrderItems(cartItems));
-                history.push("/order");
+                navigate("/order");
               }}
               text={"Підтвердити"}
               color="primary"
